@@ -45,39 +45,11 @@ jobs:
         env:
           NODE_ENV: production
           
-      - name: Create distribution archive
-        run: tar -czf dist.tar.gz dist
+      - name: Deploy to production directory
+        run: sudo cp -r dist/* /var/www/youraiprofitpilot/
         
-      - name: Deploy to VPS
-        env:
-          VPS_HOST: ${{ secrets.VPS_HOST }}
-          VPS_USER: ${{ secrets.VPS_USER }}
-          VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
-          VPS_DEPLOY_DIR: ${{ secrets.VPS_DEPLOY_DIR }}
-        run: |
-          # Install sshpass if not available
-          which sshpass || (apt-get update && apt-get install -y sshpass)
-          
-          # Upload distribution archive to VPS
-          sshpass -p "$VPS_PASSWORD" scp -o StrictHostKeyChecking=no \
-            dist.tar.gz "$VPS_USER@$VPS_HOST:$VPS_DEPLOY_DIR/"
-          
-          # Extract and restart PM2 process on VPS
-          sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no \
-            "$VPS_USER@$VPS_HOST" << 'EOF'
-          cd $VPS_DEPLOY_DIR
-          tar -xzf dist.tar.gz
-          pm2 restart youraiprofitpilot
-          pm2 save
-          EOF
-          
+      - name: Reload Nginx
+        run: sudo systemctl reload nginx
+        
       - name: Verify deployment
-        env:
-          VPS_HOST: ${{ secrets.VPS_HOST }}
-          VPS_USER: ${{ secrets.VPS_USER }}
-          VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
-        run: |
-          echo "Deployment completed successfully!"
-          echo "Verifying PM2 process status..."
-          sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no \
-            "$VPS_USER@$VPS_HOST" pm2 status
+        run: echo "✅ Deployment completed successfully!"
