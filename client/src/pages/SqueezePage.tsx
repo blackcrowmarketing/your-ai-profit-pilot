@@ -78,11 +78,14 @@ export default function SqueezePage() {
         </div>
       </div>
 
-      {/* Header */}
+          {/* Header */}
       <header className="bg-white border-b border-gray-100 py-4 px-4 md:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center gap-3">
-            <img src="/favicon.png" alt="Your AI Profit Pilot Logo" className="w-10 h-10" />
+            <picture>
+              <source srcSet="/favicon.webp" type="image/webp" />
+              <img src="/favicon.png" alt="Your AI Profit Pilot Logo" className="w-10 h-10" loading="lazy" />
+            </picture>
             <h1 className="text-2xl md:text-3xl font-bold text-[#003366]">
               Your AI Profit Pilot
             </h1>
@@ -108,10 +111,15 @@ export default function SqueezePage() {
           {/* Video Container */}
           <div className="mb-8 rounded-lg overflow-hidden shadow-lg border border-gray-200">
             <div className="relative w-full bg-black" style={{ paddingBottom: "56.25%" }}>
+              <picture>
+                <source srcSet="/images/hero-ai-network.webp" type="image/webp" />
+                <img src="/images/hero-ai-network.jpg" alt="Hero" className="absolute top-0 left-0 w-full h-full object-cover" loading="lazy" />
+              </picture>
               <video
                 className="absolute top-0 left-0 w-full h-full"
                 controls
                 poster="/images/hero-ai-network.jpg"
+                loading="lazy"
               >
                 <source src="https://d2xsxph8kpxj0f.cloudfront.net/310519663076525872/8eRdvGBournYAMuk2rFpRh/videos/IntroducingVAIOS.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
