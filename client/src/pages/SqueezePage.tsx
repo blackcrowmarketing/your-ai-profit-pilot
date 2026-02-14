@@ -111,15 +111,10 @@ export default function SqueezePage() {
           {/* Video Container */}
           <div className="mb-8 rounded-lg overflow-hidden shadow-lg border border-gray-200">
             <div className="relative w-full bg-black" style={{ paddingBottom: "56.25%" }}>
-              <picture>
-                <source srcSet="/images/hero-ai-network.webp" type="image/webp" />
-                <img src="/images/hero-ai-network.jpg" alt="Hero" className="absolute top-0 left-0 w-full h-full object-cover" loading="lazy" />
-              </picture>
               <video
                 className="absolute top-0 left-0 w-full h-full"
                 controls
                 poster="/images/hero-ai-network.jpg"
-                loading="lazy"
               >
                 <source src="https://d2xsxph8kpxj0f.cloudfront.net/310519663076525872/8eRdvGBournYAMuk2rFpRh/videos/IntroducingVAIOS.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
