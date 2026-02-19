@@ -8,10 +8,10 @@ jobs:
   dispatch:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger Master Controller
-        uses: peter-evans/repository-dispatch@v3
-        with:
-          token: ${{ secrets.ZERO_TOUCH_FLEET_MASTER }}
-          repository: blackcrowmarketing/black-crow-media
-          event-type: deploy_site
-          client-payload: '{"site": "your-ai-profit-pilot"}'
+      - name: Trigger Master Controller with Nuclear Option
+        run: |
+          curl -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token ${{ secrets.ZERO_TOUCH_PROFIT_PILOT }}" \
+            https://api.github.com/repos/blackcrowmarketing/black-crow-media/dispatches \
+            -d '{"event_type":"deploy_site","client_payload":{"site":"your-ai-profit-pilot"}}'
