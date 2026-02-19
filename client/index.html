@@ -7,7 +7,26 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1" />
     <title>Your AI Profit Pilot - Vyvo Business Opportunity Landing Page</title>
+    <!-- Favicon with async loading to prevent render blocking -->
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="preload" href="/favicon.webp" as="image" />
+    <!-- Critical inline styles to prevent blank screen -->
+    <style>
+      html, body, #root {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+      }
+      body {
+        background: #ffffff;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+      }
+      #root {
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
     <!-- THIS IS THE START OF A COMMENT BLOCK, BLOCK TO BE DELETED: Google Fonts here, example:
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,6 +36,9 @@
 
   <body>
     <div id="root"></div>
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/assets/index.css" as="style" />
+    <link rel="preload" href="/assets/index.js" as="script" />
     <script type="module" src="/src/main.tsx"></script>
     <script
       defer

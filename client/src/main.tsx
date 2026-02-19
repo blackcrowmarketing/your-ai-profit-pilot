@@ -52,10 +52,22 @@ const trpcClient = trpc.createClient({
   ],
 });
 
-createRoot(document.getElementById("root")!).render(
-  <trpc.Provider client={trpcClient} queryClient={queryClient}>
-    <QueryClientProvider client={queryClient}>
-      <App />
-    </QueryClientProvider>
-  </trpc.Provider>
-);
+// Ensure root element exists and is ready before rendering
+const rootElement = document.getElementById("root");
+if (!rootElement) {
+  console.error("Root element not found");
+  document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#fff;font-family:sans-serif;">Loading...</div>';
+} else {
+  try {
+    createRoot(rootElement).render(
+      <trpc.Provider client={trpcClient} queryClient={queryClient}>
+        <QueryClientProvider client={queryClient}>
+          <App />
+        </QueryClientProvider>
+      </trpc.Provider>
+    );
+  } catch (error) {
+    console.error("Failed to render app:", error);
+    rootElement.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#fff;font-family:sans-serif;color:#333;"><div style="text-align:center;"><h2>Something went wrong</h2><p>Please refresh the page</p></div></div>';
+  }
+}
